@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import viewsets
+from rest_framework import viewsets, mixins
 from rest_framework.permissions import IsAuthenticated
 
 
@@ -7,6 +7,9 @@ from .permissions import AuthorOrReadOnly
 from .serializers import PostSerializer, GroupSerializer, CommentSerializer, FollowSerializer
 from posts.models import Group, Post, Follow
 
+
+class ListCreateViewSet(mixins.CreateModelMixin, mixins.ListModelMixin,viewsets.GenericViewSet):
+    pass
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
@@ -36,12 +39,12 @@ class CommentViewSet(viewsets.ModelViewSet):
         post = get_object_or_404(Post, pk=pk)
         serializer.save(author=self.request.user, post=post)
 
-class FollowViewSet(viewsets.ModelViewSet):
+
+class FollowViewSet(ListCreateViewSet):
     serializer_class = FollowSerializer
-    permission_classes = (AuthorOrReadOnly,)
 
     def get_queryset(self):
-        new_queryset = Follow.objects.filter(user=self.request.user)
+        new_queryset = self.request.user.followers
         return new_queryset
 
     def perform_create(self, serializer):
