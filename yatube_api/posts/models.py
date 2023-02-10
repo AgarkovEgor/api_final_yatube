@@ -3,10 +3,12 @@ from django.db import models
 
 User = get_user_model()
 
+
 class Group(models.Model):
     title = models.CharField(max_length=50)
     slug = models.SlugField()
     description = models.TextField()
+
 
 class Post(models.Model):
     text = models.TextField()
@@ -43,4 +45,3 @@ class Follow(models.Model):
     class Meta:
         constraints = (models.UniqueConstraint(fields=('user', 'following'),
                                                name='unique_follow'),)
-
