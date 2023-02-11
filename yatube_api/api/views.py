@@ -59,8 +59,7 @@ class FollowViewSet(ListCreateViewSet):
     )
 
     def get_queryset(self):
-        new_queryset = self.request.user.followers
-        return new_queryset
+        return self.request.user.followers
 
     def perform_create(self, serializer):
         return serializer.save(user=self.request.user)
