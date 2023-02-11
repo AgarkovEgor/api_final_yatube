@@ -1,8 +1,8 @@
-#Как запустить проект:
-##Клонировать репозиторий и перейти в него в командной строке:
-    ##`git clone https://github.com/AKEkt/api_final_yatube.gi`
-    ##`cd api_final_yatube`
-##Cоздать и активировать виртуальное окружение:
+# Как запустить проект:
+## Клонировать репозиторий и перейти в него в командной строке:
+    ## `git clone https://github.com/AKEkt/api_final_yatube.gi`
+    ## `cd api_final_yatube`
+## Cоздать и активировать виртуальное окружение:
     python3 -m venv env
     source env/bin/activate
 Установить зависимости из файла requirements.txt:
